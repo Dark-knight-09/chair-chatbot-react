@@ -113,7 +113,7 @@ const Chat = ({ isChatVisible, setIsChatVisible }) => {
         } else if (response.data.type === "input_image") {
           const inputImageMessage = {
             type: "input_image",
-            text: response.data.text,
+            text: response.data.message,
             order_number: response.data.order_number,
             sender: "bot",
             time: getCurrentTime(),
@@ -145,7 +145,7 @@ const Chat = ({ isChatVisible, setIsChatVisible }) => {
 
       <div className="chat-box" ref={chatBoxRef}>
         {messages.map((msg, index) => (
-          <div key={index}>{renderMessage(msg, handleBuyNowClick)}</div>
+          <div key={index}>{renderMessage(msg, handleBuyNowClick, setMessages)}</div>
         ))}
         {loading && <div className="message bot loading">Loading...</div>}
       </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios'
 
-const InputImageMessage = ({ message }) => {
+const InputImageMessage = ({ message, setmessages }) => {
   const [showForm, setShowForm] = useState(false);
   const [file, setFile] = useState(null);
 
@@ -26,11 +26,17 @@ const InputImageMessage = ({ message }) => {
     formData.append('document', file);
 
     try {
-      const response = await axios.post('http://localhost:8000/upload/', formData, {
+      const response = await axios.post('http://localhost:8000/api/image-upload/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+      const botMessage = {
+        text: response.data.message,
+        sender: "bot",
+        time: getCurrentTime(),
+      };
+      setMessages((prev) => [...prev, botMessage]);
       console.log('File uploaded successfully:', response.data);
     } catch (error) {
       console.error('Error uploading file:', error);

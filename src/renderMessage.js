@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import "./orderHandler"; // Import the orderHandler.js 
+import "./orderHandler"; 
 import InputImageMessage from './InputImageMessage';
 
-const renderMessage = (message, handleBuyNowClick) => {
+const renderMessage = (message, handleBuyNowClick, setmessages) => {
   if (message.type === "product") {
     return (
       <div className="message bot">
@@ -78,7 +78,7 @@ const renderMessage = (message, handleBuyNowClick) => {
       </div>
     );
   } else if (message.type === "input_image") {
-    return <InputImageMessage message={message} />;
+    return <InputImageMessage message={message} setmessages={setmessages} />;
   } else {
     return (
       <div className={`message ${message.sender}`}>
